@@ -6,6 +6,18 @@ This documentation provides a comprehensive guide to installing, using, and deve
 
 Gemini CLI brings the capabilities of Gemini models to your terminal in an interactive Read-Eval-Print Loop (REPL) environment. Gemini CLI consists of a client-side application (`packages/cli`) that communicates with a local server (`packages/core`), which in turn manages requests to the Gemini API and its AI models. Gemini CLI also contains a variety of tools for tasks such as performing file system operations, running shells, and web fetching, which are managed by `packages/core`.
 
+## Interactive Workflow
+
+When a user makes a request in interactive mode, the following workflow is triggered:
+
+1.  **User Input:** The user types a request in the CLI.
+2.  **Request to `packages/core`:** The CLI sends the user's request to the `packages/core` server. This is done in the `packages/cli/src/gemini.tsx` file.
+3.  **Tool Execution:** `packages/core` receives the request and determines which tool to use based on the user's input. The tool is then executed. This logic is handled in `packages/core/src/core/tool-core.ts`.
+4.  **Response from `packages/core`:** Once the tool has finished executing, `packages/core` sends the result back to the CLI.
+5.  **Output Display:** The CLI receives the response and displays the output to the user. This is handled in `packages/cli/src/gemini.tsx`.
+
+This entire process is asynchronous, allowing the user to continue interacting with the CLI while tools are being executed.
+
 ## Navigating the documentation
 
 This documentation is organized into the following sections:
